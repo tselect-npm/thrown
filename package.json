@@ -1,17 +1,30 @@
 {
   "name": "@tselect/thrown",
   "version": "1.0.2",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "test": "mocha",
-    "build": "rm -rf ./dist && tsc -p tsconfig.publish.json",
-    "prepack": "npm run build"
+    "build": "tsdown",
+    "prepack": "pnpm build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.3.6",
     "@types/mocha": "^10.0.2",
@@ -19,6 +32,7 @@
     "chai": "^4.3.10",
     "mocha": "^10.2.0",
     "ts-node": "^10.9.1",
+    "tsdown": "^0.22.14",
     "typescript": "^5.2.2"
   },
   "keywords": [
