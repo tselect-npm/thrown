@@ -27,12 +27,12 @@ describe('thrown()', () => {
         throw new MyError();
       } catch (err) {
         thrown(err)
-          .catch(MyError, e => {
+          .catch(MyError, (e) => {
             message = e.customMessage;
           })
           .rethrowUncaught();
       }
-    } catch (err) {
+    } catch {
       throw `Should not have thrown!`;
     }
 
@@ -47,18 +47,18 @@ describe('thrown()', () => {
         throw new MyOtherError();
       } catch (err) {
         thrown(err)
-          .catch(MyError, e => {
+          .catch(MyError, (e) => {
             message = e.customMessage;
           })
-          .catch(MyOtherError, e => {
+          .catch(MyOtherError, (e) => {
             message = e.otherCustomMessage;
           })
-          .catch(Error, e => {
+          .catch(Error, (e) => {
             message = e.message;
           })
           .rethrowUncaught();
       }
-    } catch (err) {
+    } catch {
       throw `Should not have thrown!`;
     }
 
@@ -72,10 +72,7 @@ describe('thrown()', () => {
       try {
         throw e;
       } catch (err) {
-        thrown(err)
-          .catch(MyError, noop)
-          .catch(MyOtherError, noop)
-          .rethrowUncaught();
+        thrown(err).catch(MyError, noop).catch(MyOtherError, noop).rethrowUncaught();
       }
     } catch (err) {
       expect(err).toBe(e);
@@ -92,10 +89,7 @@ describe('thrown()', () => {
       try {
         throw new Error(`foobar`);
       } catch (err) {
-        thrown(err)
-          .catch(MyError, noop)
-          .catch(MyOtherError, noop)
-          .rethrowUncaught(e);
+        thrown(err).catch(MyError, noop).catch(MyOtherError, noop).rethrowUncaught(e);
       }
     } catch (err) {
       expect(err).toBe(e);
@@ -115,11 +109,11 @@ describe('thrown()', () => {
         thrown(err)
           .catch(MyError, noop)
           .catch(MyOtherError, noop)
-          .catchAny<Error>(e => {
+          .catchAny<Error>((e) => {
             message = e.message;
           });
       }
-    } catch (err) {
+    } catch {
       throw `Should not have thrown!`;
     }
 
@@ -129,7 +123,7 @@ describe('thrown()', () => {
   it('should catch error matching predicate', () => {
     type CustomError = { foo: 'bar' };
 
-    const predicate = (err: any): err is CustomError => {
+    const predicate = (err: unknown): err is CustomError => {
       return true;
     };
 
@@ -142,12 +136,12 @@ describe('thrown()', () => {
         thrown(err)
           .catch(MyError, noop)
           .catch(MyOtherError, noop)
-          .catchPredicate<CustomError>(predicate, e => {
+          .catchPredicate<CustomError>(predicate, (e) => {
             message = e.foo;
           })
           .rethrowUncaught();
       }
-    } catch (err) {
+    } catch {
       throw `Should not have thrown!`;
     }
 
@@ -158,7 +152,7 @@ describe('thrown()', () => {
     let predicateCalled = false;
     let message: string | null = null;
 
-    const predicate = (_err: any): _err is MyError => {
+    const predicate = (_err: unknown): _err is MyError => {
       predicateCalled = true;
       return true;
     };
@@ -167,7 +161,7 @@ describe('thrown()', () => {
       throw new MyError();
     } catch (err) {
       thrown(err)
-        .catch(MyError, e => {
+        .catch(MyError, (e) => {
           message = e.customMessage;
         })
         .catchPredicate(predicate, () => {
@@ -182,7 +176,7 @@ describe('thrown()', () => {
 
   it('should leave the error uncaught when the predicate does not match', () => {
     const e = new Error('foobar');
-    const predicate = (_err: any): _err is MyError => false;
+    const predicate = (_err: unknown): _err is MyError => false;
 
     try {
       try {
@@ -205,7 +199,7 @@ describe('thrown()', () => {
       throw new MyError();
     } catch (err) {
       thrown(err)
-        .catch(MyError, e => {
+        .catch(MyError, (e) => {
           message = e.customMessage;
         })
         .catchAny(() => {

@@ -25,10 +25,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "cov": "vitest run --coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
     "build": "tsdown",
     "prepack": "pnpm build"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.8",
     "@types/node": "22.20.1",
     "@vitest/coverage-v8": "^4.1.10",
     "tsdown": "^0.22.14",
