@@ -32,5 +32,6 @@
   ],
   "author": "Sylvain Estevez",
   "license": "MIT",
+  "packageManager": "pnpm@11.21.0",
   "description": "Handle specific exceptions in Typescript like you would in classic OOP languages."
 }
