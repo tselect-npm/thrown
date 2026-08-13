@@ -3,10 +3,13 @@
   "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "mocha",
-    "build": "tsc -p tsconfig.json",
-    "prepublish": "rm -rf ./dist && tsc -p tsconfig.publish.json"
+    "build": "rm -rf ./dist && tsc -p tsconfig.publish.json",
+    "prepack": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {
