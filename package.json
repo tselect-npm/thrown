@@ -33,14 +33,6 @@
     "prepack": "pnpm build",
     "prepublishOnly": "pnpm lint && pnpm cov && pnpm build"
   },
-  "devDependencies": {
-    "@biomejs/biome": "^2.5.8",
-    "@types/node": "22.20.1",
-    "@vitest/coverage-v8": "^4.1.10",
-    "tsdown": "^0.22.14",
-    "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
-  },
   "keywords": [
     "tselect",
     "error",
@@ -48,10 +40,28 @@
     "error handler",
     "catch",
     "exception",
-    "typescript"
+    "rethrow",
+    "typescript",
+    "esm"
   ],
   "author": "Sylvain Estevez",
   "license": "MIT",
   "packageManager": "pnpm@11.21.0",
-  "description": "Handle specific exceptions in Typescript like you would in classic OOP languages."
+  "description": "Handle specific exceptions in TypeScript like you would in classic OOP languages.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tselect-npm/thrown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tselect-npm/thrown/issues"
+  },
+  "homepage": "https://github.com/tselect-npm/thrown#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.8",
+    "@types/node": "22.20.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
 }
