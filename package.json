@@ -1,6 +1,7 @@
 {
   "name": "@tselect/thrown",
   "version": "1.0.2",
+  "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -21,19 +22,18 @@
     "dist"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "cov": "vitest run --coverage",
     "build": "tsdown",
     "prepack": "pnpm build"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.6",
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^20.8.0",
-    "chai": "^4.3.10",
-    "mocha": "^10.2.0",
-    "ts-node": "^10.9.1",
+    "@types/node": "22.20.1",
+    "@vitest/coverage-v8": "^4.1.10",
     "tsdown": "^0.22.14",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^4.1.10"
   },
   "keywords": [
     "tselect",

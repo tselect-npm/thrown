@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { thrown } from './thrown';
-import { expect } from 'chai';
 
 class MyError {
   public readonly customMessage: string;
@@ -36,7 +36,7 @@ describe('thrown()', () => {
       throw `Should not have thrown!`;
     }
 
-    expect(message).to.equal('MyError');
+    expect(message).toBe('MyError');
   });
 
   it('should catch specific error (multiple catchers)', () => {
@@ -62,7 +62,7 @@ describe('thrown()', () => {
       throw `Should not have thrown!`;
     }
 
-    expect(message).to.equal('MyOtherError');
+    expect(message).toBe('MyOtherError');
   });
 
   it('should rethrow uncaught error', () => {
@@ -78,7 +78,7 @@ describe('thrown()', () => {
           .rethrowUncaught();
       }
     } catch (err) {
-      expect(err).to.equal(e);
+      expect(err).toBe(e);
       return;
     }
 
@@ -98,7 +98,7 @@ describe('thrown()', () => {
           .rethrowUncaught(e);
       }
     } catch (err) {
-      expect(err).to.equal(e);
+      expect(err).toBe(e);
       return;
     }
 
@@ -123,7 +123,7 @@ describe('thrown()', () => {
       throw `Should not have thrown!`;
     }
 
-    expect(message).to.equal('foobar');
+    expect(message).toBe('foobar');
   });
 
   it('should catch error matching predicate', () => {
@@ -151,6 +151,6 @@ describe('thrown()', () => {
       throw `Should not have thrown!`;
     }
 
-    expect(message).to.equal('bar');
+    expect(message).toBe('bar');
   });
 });
