@@ -1,22 +1,37 @@
 {
   "name": "@tselect/thrown",
   "version": "1.0.2",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "mocha",
-    "build": "tsc -p tsconfig.json",
-    "prepublish": "rm -rf ./dist && tsc -p tsconfig.publish.json"
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/chai": "^4.3.6",
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^20.8.0",
-    "chai": "^4.3.10",
-    "mocha": "^10.2.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "cov": "vitest run --coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "build": "tsdown",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm lint && pnpm cov && pnpm build"
   },
   "keywords": [
     "tselect",
@@ -25,9 +40,31 @@
     "error handler",
     "catch",
     "exception",
-    "typescript"
+    "rethrow",
+    "typescript",
+    "esm"
   ],
   "author": "Sylvain Estevez",
   "license": "MIT",
-  "description": "Handle specific exceptions in Typescript like you would in classic OOP languages."
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.21.0",
+  "description": "Handle specific exceptions in TypeScript like you would in classic OOP languages.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tselect-npm/thrown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tselect-npm/thrown/issues"
+  },
+  "homepage": "https://github.com/tselect-npm/thrown#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.8",
+    "@types/node": "22.20.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
 }
